@@ -17,5 +17,5 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('', views.landing.as_view()),
-    path('aboutme/', views.about.as_view()),
+    path('about_me/', views.about.as_view()),
 ]
