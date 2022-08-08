@@ -1,21 +1,9 @@
-<!DOCTYPE html>
+{% extends 'blog/base.html' %}
+{% block head_title %}Home{% endblock %}
+
+{% block main_area %}
 {% load static %}
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>home</title>
-    <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
-</head>
-<body>
-    <span><a href='.'><b>home</b></a></span>
-    <span><a href='about_me/'>about me</a></span>
-    <span><a href='blog/'>blog</a></span>
-    <h1>home</h1>
-    
-    <nav>
-
-    </nav>
-
-
-</body>
-</html>
+<link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
+{% endblock %}
+{% include 'blog/navbar.html' %}
+{% include 'blog/footer.html' %}

@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>detail</title>
-</head>
-<body>
-    <nav>
-        <a href="../../">home</a>
-        <a href="../../about_me">about me</a>
-        <a href="..">blog</a>
-    </nav>
-    <h1>detail</h1>
-    <h1>{{post.title}}</h1>
-    <h4>{{post.created_at}}</h4>
-    <p>{{post.content}}</p>
+{% extends 'blog/base.html' %}
+{% block head_title %}Post Detail{% endblock %}
 
-</body>
-</html>
+{% block main_area %}
+    <h1>{{post.title}}</h1>
+    <h4>{{post.create_at}}</h4>
+    <p>{{post.content}}</p>
+{% endblock %}
