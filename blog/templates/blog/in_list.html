@@ -1,27 +1,57 @@
 {% extends 'blog/base.html' %}
-{% block head_title %}Post List{% endblock %}
+    {% block head_title %}Post List{% endblock %}
 
-{% block main_area %}
-{% load static %}
-<link rel="stylesheet" href= "{% static 'blog/css/list.css' %}">
+    {% block main_area %}
 
-{% for p in object_list %}
 
-    <div class="col-lg-6">
-        <div class='card mb-4'>
-            {% if  p.head_image %}
-            <img class='card_img_top' src='{{ p.head_image.url}}' alt='Card image cap'>
-            {% else %}
-            <img class='card_img_top' src='https://picsum.photos/seed/{{p.pk}}/800/200' alt='Random image cap'>
-            {% endif %}
-            <div class="card-body">
-                <h2>{{p.title}}</h2>
-                <h4 class="lead">{{ p.content}}</h4>
-                <p class="text-muted">{{ p.create_at }}</p>
-                <a  class="btn btn-primary btn-sm" role="button" href='{{p.get_absolute_url}}'>read more</a>
+    {% load static %}
+    <link rel="stylesheet" href= "{% static 'blog/css/list.css' %}">
+
+    <h1 class='text-light'>
+    {% if category %}
+    Blog<span class='badge badge-secondary'>{{ category }}
+        {% if category == '미분류' %}
+        ({{ no_category_post_count }})
+        {% else %}
+        ({{ category.post_set.count }})
+    {% endif %}
+    </sapn>
+    {% endif %}
+    {% if tag %}
+    Blog<span class='badge badge-light'><i class='fas fa-tags'></i>{{ tag }} ({{ tag.post_set.count }})</sapn>{% endif %}
+    </h1>
+
+    {% for p in object_list %}
+        <div class="col-lg-6">
+            <div class='card mb-4' id='post-{{ p.pk }}'>
+                {% if  p.head_image %}
+                    <img class='card_img_top' src='{{ p.head_image.url}}' alt='Card image cap'>
+                {% else %}
+                    <img class='card_img_top' src='https://picsum.photos/seed/{{p.pk}}/800/200' alt='Random image cap'>
+                {% endif %}
+                <div class="card-body">
+                    {% if p.category %}
+                        <span class='badge badge-secondary float-right'>{{ p.category }}</span>
+                    {% else %}
+                        <span class='badge badge-secondary float-right'>미분류</span>
+                    {% endif %}
+                    <h2>{{p.title}}</h2>
+                    <h5 class='text-muted'>{{p.hook_text}}</h5>
+                    <h4 class="lead">{{ p.content | truncatechars:50}}</h4>
+                    <p class="text-muted">{{ p.create_at }}</p>
+                    <a href='#'>{{p.author}}</a>
+                    {% if p.tags.exists %}
+                        <i class="fa-solid fa-tag"></i>
+                        {% for tag in p.tags.iterator %}
+                            <a href='{{ tag.get_absolute_url }}'><span class='badge badge-pill badge-light'>{{ tag }}</sapn></a>
+                        {% endfor %}
+                        <br/>
+                        <br/>
+                    {% endif %}
+                    <a  class="btn btn-primary btn-sm" role="button" href='{{p.get_absolute_url}}'>read more</a>
+                </div>
             </div>
         </div>
-    </div>
-{% endfor %}
-
-{% endblock %}
+    {% endfor %}
+    
+    {% endblock %}
