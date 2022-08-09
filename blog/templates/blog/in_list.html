@@ -2,11 +2,26 @@
 {% block head_title %}Post List{% endblock %}
 
 {% block main_area %}
+{% load static %}
+<link rel="stylesheet" href= "{% static 'blog/css/list.css' %}">
+
 {% for p in object_list %}
-    <hr/>
-    <h2><a href='{{p.get_absolute_url}}'>{{p.title}}</a></h2>
-    <h4>{{ p.create_at}}</h4>
-    <p>{{ p.content }}</p>
+
+    <div class="col-lg-6">
+        <div class='card mb-4'>
+            {% if  p.head_image %}
+            <img class='card_img_top' src='{{ p.head_image.url}}' alt='Card image cap'>
+            {% else %}
+            <img class='card_img_top' src='https://picsum.photos/seed/{{p.pk}}/800/200' alt='Random image cap'>
+            {% endif %}
+            <div class="card-body">
+                <h2>{{p.title}}</h2>
+                <h4 class="lead">{{ p.content}}</h4>
+                <p class="text-muted">{{ p.create_at }}</p>
+                <a  class="btn btn-primary btn-sm" role="button" href='{{p.get_absolute_url}}'>read more</a>
+            </div>
+        </div>
+    </div>
 {% endfor %}
 
 {% endblock %}

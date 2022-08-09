@@ -1,9 +1,9 @@
 {% extends 'blog/base.html' %}
 {% block head_title %}Home{% endblock %}
 
+{% include 'blog/navbar.html' %}
 {% block main_area %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
+<link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}">
 {% endblock %}
-{% include 'blog/navbar.html' %}
 {% include 'blog/footer.html' %}

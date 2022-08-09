@@ -2,7 +2,25 @@
 {% block head_title %}Post Detail{% endblock %}
 
 {% block main_area %}
-    <h1>{{post.title}}</h1>
-    <h4>{{post.create_at}}</h4>
-    <p>{{post.content}}</p>
+  <div class="jumbotron jumbotron-fluid col-lg-12">
+    <div class="container">
+        <div class='card mb-4'>
+            {% if  post.head_image %}
+            <img class='card_img_top' src='{{ post.head_image.url}}' alt='Card image cap'>
+            {% else %}
+            <img class='card_img_top' src='https://picsum.photos/seed/{{p.id}}/800/200' alt='Random image cap'>
+            {% endif %}
+            <h1 class="display-4">{{post.title}}</h1>
+            <h4 class="lead">{{post.content}}</h4>
+
+            {% if post.file_upload %}
+              <a href='{{post.file_upload.url}}' class='btn btn-outline-dark btn-sm col-2' role='button' download>Download</a>
+            {% endif %}
+
+            <hr class="my-2">
+            <p class="text-muted">{{post.create_at}}</p>
+        </div>
+    </div>
+  </div>
+  
 {% endblock %}
