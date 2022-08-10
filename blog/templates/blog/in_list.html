@@ -1,23 +1,34 @@
 {% extends 'blog/base.html' %}
     {% block head_title %}Post List{% endblock %}
 
+
     {% block main_area %}
 
-
+    <span class="col">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <a class='btn btn-info btn-sm float-right' href='/blog/create_post/' role='button'>New post</a>
+            {% endif %}
+        {% endif %}
+    </span>
+    
     {% load static %}
     <link rel="stylesheet" href= "{% static 'blog/css/list.css' %}">
 
+
+
     <h1 class='text-light'>
-    {% if category %}
-    Blog<span class='badge badge-secondary'>{{ category }}
-        {% if category == '미분류' %}
-        ({{ no_category_post_count }})
-        {% else %}
-        ({{ category.post_set.count }})
-    {% endif %}
-    </sapn>
-    {% endif %}
-    {% if tag %}
+    
+        {% if category %}
+        Blog<span class='badge badge-secondary'>{{ category }}
+            {% if category == '미분류' %}
+            ({{ no_category_post_count }})
+            {% else %}
+            ({{ category.post_set.count }})
+            {% endif %}
+        </sapn>
+        {% endif %}
+        {% if tag %}
     Blog<span class='badge badge-light'><i class='fas fa-tags'></i>{{ tag }} ({{ tag.post_set.count }})</sapn>{% endif %}
     </h1>
 
