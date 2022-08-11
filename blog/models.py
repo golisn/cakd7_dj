@@ -1,5 +1,3 @@
-from curses.ascii import US
-from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField
