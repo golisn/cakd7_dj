@@ -2,9 +2,13 @@
 {% block head_title %}Post Detail{% endblock %}
 
 {% block main_area %}
-  <div class="jumbotron jumbotron-fluid col-lg-12">
+
+  <div class="jumbotron jumbotron-fluid col-lg-12 py-2">
+    {% if user.is_authenticated and user == post.author %}
+  <a class='btn btn-info btn-sm float-right col-2' href='/blog/update_post/{{ post.pk }}/' role='button'<i class='fas fa-pen'></i> Edit post</a>
+      {% endif %}
     <div class="container">
-      <div class='card mb-4'>
+      <div class='card mb-4 col'>
         {% if  post.head_image %}
         <img class='card_img_top' src='{{ post.head_image.url}}' alt='Card image cap'>
         {% else %}
@@ -23,13 +27,13 @@
         <h4 class="lead">{{post.content}}</h4>
 
         {% if post.tags.exists %}
+        <div class='col px-0'>
         <i class="fa-solid fa-tag"></i>
         {% for tag in post.tags.all %}
             <a href='{{ tag.get_absolute_url }}'><span class='badge badge-pill badge-light'>{{ tag }}</sapn></a>
         {% endfor %}
-        <br/>
-        <br/>
-    {% endif %}
+        </div>
+      {% endif %}
 
 
         {% if post.file_upload %}
@@ -56,5 +60,4 @@
       </div>
     </div>
   </div>
-  
 {% endblock %}

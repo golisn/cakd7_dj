@@ -12,7 +12,7 @@
 
 <body>
     {% include 'blog/navbar.html' %}
-    <header class="py-2 bg-light mb-4">
+    <header class="py-2 bg-light mb-2">
         <div class="container">
             <div class="text-center my-2">
                 <h2 class="fw-bolder">Welcome to Blog Home!</h2>
@@ -22,51 +22,52 @@
     </header>
 
     <div class="container" >
-    <div class="row">
-        <!-- Blog entries-->
-        <div class="col-lg-9">
-            <!-- Featured blog post-->
-            
-            
-            <!-- Nested row for non-featured blog posts-->
-            <div class="row">
-            {% block main_area %}
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-9">
+                <!-- Featured blog post-->
+                
+                
+                <!-- Nested row for non-featured blog posts-->
+                <div class='row'>
+                {% block main_area %}
 
-            {% endblock %}
-            </div>
-        </div>
-        <!-- Side widgets-->
-        <div class="col-lg-3 ">
-            <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
+                {% endblock %}
                 </div>
             </div>
-            <!-- Categories widget-->
-            <div class="card mb-4" id='Categories-card'>
-                <div class="card-header">Categories</div>
-                <div class="card-body">
-                    <div class="row">
-                        <ul>
-                            {% block categories %}
-                            {% for category in categories %}
-                            <li><a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a></li>
-                            {% endfor %}
-                            <li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>
-                            {% endblock %}
-                        </ul>
+            <!-- Side widgets-->
+            <div class="col-lg-3 px-3">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Side widget-->
-            <div class="card mb-4">
-                <div class="card-header">Side Widget</div>
-                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                <!-- Categories widget-->
+                <div class="card mb-4" id='Categories-card'>
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ul>
+                                {% block categories %}
+                                {% for category in categories %}
+                                <li><a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a></li>
+                                {% endfor %}
+                                <li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>
+                                {% endblock %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                </div>
             </div>
         </div>
     </div>
