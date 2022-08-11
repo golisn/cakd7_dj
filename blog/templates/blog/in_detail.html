@@ -20,11 +20,11 @@
         {% else %}
         <span class='badge badge-secondary float-right'>미분류</span>
         {% endif %}
-        <h1 class="display-4">{{post.title}}</h1>
+        <h1 class="display-4">{{ post.title }}</h1>
       </div>
         
-        <h5 class='text-muted'>{{post.hook_text}}</h5>
-        <h4 class="lead">{{post.content}}</h4>
+        <h5 class='text-muted'>{{ post.hook_text }}</h5>
+        <h4 class="lead">{{ post.get_content_markdown | safe }}</h4>
 
         {% if post.tags.exists %}
         <div class='col px-0'>
