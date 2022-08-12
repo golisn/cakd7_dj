@@ -10,7 +10,7 @@
                     <li class="nav-item {% if request.path == '/' %} active {% endif %}"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item {% if request.path == "/about_me/" %} active {% endif %}"><a class="nav-link" href="/about_me">About Me</a></li>
                     <li class="nav-item {% if request.path == "/blog/"%} active {% endif %}"><a class="nav-link" href="/blog">Blog</a></li>
-                    {% comment %} <li class="nav-item {% if request.path == "/blog/{{post.pk}}/" %} active {% endif %}"><a class="nav-link" href="/blog/{{post.pk}}"> blog</a></li> {% endcomment %}
+                    {% comment %} <li class="nav-item {% if request.path == "/blog/[0-9]*/" %} active {% endif %}"><a class="nav-link" href="/blog/{{post.pk}}">blog</a></li> {% endcomment %}
                     {% comment %} 위에 active 코딩 실패함.. {% endcomment %}
             {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
