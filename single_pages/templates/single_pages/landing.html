@@ -1,18 +1,48 @@
 {% extends 'blog/base.html' %}
+
 {% block head_title %}Home{% endblock %}
 
 {% include 'blog/navbar.html' %}
 {% block main_area %}
 {% load static %}
+
 <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}">
 
 {% endblock %}
+{% block side_area %}
 
+<div class='col-lg-5 mt-5'>
+    <h2>Recent-Post</h2>
+    {% for post in recent_posts %}
+    <div class='card mt-1'>
+        <div class='card body'>
+            <h6><a href='{{ post.get_absolute_url }}' class='text-decoration-none text-dark'>{{ post.title }}</a></h6>
+            <span class='badge badge-pill badge-light float-right'>
+                <img class='mr-1 rounded-circle' src= {% if post.get_avatar_url == unknown %} 'https://via.placeholder.com/20x20'{% else %} '{{ post.get_avatar_url }}'  {% endif%} alt='{{ post.author }}'>
+                {{ post.author.username }}
+                &nbsp;
+                &nbsp;
+                {{ post.create_at }}
+            </span>
+        </div>
+    </div>
+    {% endfor %}
 {% block categories %}
-{% for category in categories %}
-<li><a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a></li>
-{% endfor %}
-<li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>
+<div class="card mb-4" id='Categories-card'>
+    <div class="card-header">Categories</div>
+    <div class="card-body">
+        <div class="row">
+            <ul>
+                {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a></li>
+                {% endfor %}
+                <li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>                
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
+{% endblock %}
+
 
 {% include 'blog/footer.html' %}
