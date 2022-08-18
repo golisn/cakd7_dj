@@ -12,6 +12,7 @@
 
 <body>
     {% include 'blog/navbar.html' %}
+    {% block header_area %}
     <header class="py-2 bg-light mb-2">
         <div class="container">
             <div class="text-center my-2">
@@ -20,7 +21,7 @@
             </div>
         </div>
     </header>
-
+    {% endblock %}
     <div class="container" >
         <div class="row">
             <!-- Blog entries-->
@@ -37,7 +38,7 @@
             </div>
             {% block side_area %}
             <!-- Side widgets-->
-            <div class="col-lg-3 px-3">
+            <div class="col-lg-3 px-3 mt-3" >
                 <!-- Search widget-->
                 <div class="card mb-4">
                     <div class="card-header">Search</div>

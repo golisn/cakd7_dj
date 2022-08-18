@@ -52,6 +52,7 @@ def category_page(request, slug):
         }
     )
 
+
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
     post_list = tag.post_set.all()
@@ -66,6 +67,7 @@ def tag_page(request, slug):
             'no_category_post_count': Post.objects.filter(category=None).count(),
         }
     )
+
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView ):
     model = Post
@@ -99,6 +101,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView ):
 
         else:
             return redirect('/blog/')
+
 
 class PostUpdate(LoginRequiredMixin, UpdateView, PermissionDenied):    
     model = Post
@@ -139,6 +142,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView, PermissionDenied):
         
         return response
 
+
 def new_comment(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)
@@ -156,8 +160,9 @@ def new_comment(request, pk):
         else:
             raise PermissionDenied
 
+
 class CommentUpdate(LoginRequiredMixin, UpdateView):
-    model =Comment
+    model = Comment
     form_class = CommentForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -165,6 +170,7 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
             return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
 
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -174,6 +180,7 @@ def delete_comment(request, pk):
         return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
 
 class PostSearch(PostList):
     paginate_by = None
@@ -191,4 +198,3 @@ class PostSearch(PostList):
         context["search_info"] = f'Search: {q} ({self.get_queryset().count()})'
 
         return context
-    
